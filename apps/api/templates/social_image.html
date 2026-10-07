@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap");
+
+      body {
+        margin: 0;
+        padding: 0;
+        width: 1080px;
+        height: 1080px;
+        /* We use a cool technology image from Unsplash as the background */
+        background-image: url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1080&auto=format&fit=crop");
+        background-size: cover;
+        background-position: center;
+        color: white;
+        font-family: "Montserrat", sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+
+      /* This adds a dark blue tint over the background image so text is easy to read */
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(10, 15, 29, 0.9),
+          rgba(26, 38, 74, 0.7)
+        );
+        z-index: 1;
+      }
+
+      .container {
+        z-index: 2;
+        width: 75%;
+        padding: 60px;
+        background: rgba(255, 255, 255, 0.1);
+        border-left: 10px solid #00ffff;
+        backdrop-filter: blur(15px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        text-align: left;
+      }
+
+      .hook-text {
+        font-size: 60px;
+        font-weight: 700;
+        line-height: 1.3;
+        color: #ffffff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      /* The glowing cyan accent word */
+      .highlight {
+        color: #00ffff;
+      }
+
+      .brand-footer {
+        z-index: 2;
+        position: absolute;
+        bottom: 60px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .logo-placeholder {
+        width: 50px;
+        height: 50px;
+        background: #00ffff;
+        border-radius: 10px;
+      }
+
+      .brand-name {
+        font-size: 28px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="overlay"></div>
+
+    <div class="container">
+      <!-- Python will inject the AI text right here! -->
+      <div class="hook-text">{{ hook_text }}</div>
+    </div>
+
+    <div class="brand-footer">
+      <div class="logo-placeholder"></div>
+      <div class="brand-name">HadesReality</div>
+    </div>
+  </body>
+</html>

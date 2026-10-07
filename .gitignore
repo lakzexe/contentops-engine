@@ -12,3 +12,4 @@ __pycache__/
 .n8n/
 postgres_data/
 **/.env
+apps/api/generated_images/
