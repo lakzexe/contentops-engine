@@ -2,99 +2,213 @@
 <html>
   <head>
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap");
 
       body {
         margin: 0;
         padding: 0;
         width: 1080px;
         height: 1080px;
-        /* We use a cool technology image from Unsplash as the background */
-        background-image: url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1080&auto=format&fit=crop");
+        /* Dynamic background from AI Image Generator */
+        background-image: url("{{ bg_url }}");
         background-size: cover;
-        background-position: center;
         color: white;
-        font-family: "Montserrat", sans-serif;
+        font-family: "Inter", sans-serif;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        justify-content: space-between;
         position: relative;
+        overflow: hidden;
       }
 
-      /* This adds a dark blue tint over the background image so text is easy to read */
+      /* Dark overlay to make text readable */
       .overlay {
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(
-          135deg,
-          rgba(10, 15, 29, 0.9),
-          rgba(26, 38, 74, 0.7)
-        );
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(180deg, rgba(5, 22, 13, {{ overlay_opacity / 3 }}) 0%, rgba(2, 10, 6, {{ overlay_opacity }}) 100%);
         z-index: 1;
       }
 
-      .container {
+      /* Glow effect behind the text */
+      .glow-orb {
+        position: absolute;
+        bottom: -20%;
+        right: -10%;
+        width: 800px;
+        height: 800px;
+        background: radial-gradient(circle, rgba(0,255,170,0.15) 0%, rgba(0,0,0,0) 70%);
+        border-radius: 50%;
         z-index: 2;
-        width: 75%;
-        padding: 60px;
-        background: rgba(255, 255, 255, 0.1);
-        border-left: 10px solid #00ffff;
-        backdrop-filter: blur(15px);
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-        text-align: left;
+      }
+
+      .main-content {
+        z-index: 3;
+        padding: 100px 80px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: {{ text_position }};
       }
 
       .hook-text {
-        font-size: 60px;
-        font-weight: 700;
-        line-height: 1.3;
-        color: #ffffff;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-      }
-
-      /* The glowing cyan accent word */
-      .highlight {
-        color: #00ffff;
-      }
-
-      .brand-footer {
-        z-index: 2;
-        position: absolute;
-        bottom: 60px;
-        display: flex;
-        align-items: center;
-        gap: 20px;
-      }
-
-      .logo-placeholder {
-        width: 50px;
-        height: 50px;
-        background: #00ffff;
-        border-radius: 10px;
-      }
-
-      .brand-name {
-        font-size: 28px;
-        letter-spacing: 4px;
+        font-size: 85px;
+        font-weight: 900;
+        line-height: 1.1;
+        letter-spacing: -2px;
+        color: #00FFAA; /* Brand Neon Green */
+        margin-bottom: 40px;
         text-transform: uppercase;
       }
+
+      .sub-text {
+        font-size: 38px;
+        font-weight: 400;
+        color: #e2e8f0;
+        line-height: 1.4;
+        max-width: 800px;
+      }
+
+      .footer-section {
+        z-index: 3;
+        padding: 0 80px 80px 80px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      .cta-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .btn-pill {
+        border: 2px solid white;
+        border-radius: 50px;
+        padding: 15px 40px;
+        font-size: 24px;
+        font-weight: 600;
+        background: transparent;
+      }
+
+      .btn-dot {
+        width: 30px;
+        height: 30px;
+        background-color: #00FFAA;
+        border-radius: 50%;
+      }
+
+      .contact-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 10px;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        font-size: 20px;
+        color: #94a3b8;
+      }
+
+      .contact-icon {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Simple CSS icons */
+      .icon-globe {
+        width: 20px;
+        height: 20px;
+        border: 2px solid #64748b;
+        border-radius: 50%;
+        position: relative;
+      }
+      .icon-globe::before {
+        content: '';
+        position: absolute;
+        top: 50%; left: 0; right: 0;
+        border-top: 2px solid #64748b;
+      }
+      .icon-globe::after {
+        content: '';
+        position: absolute;
+        top: 0; bottom: 0; left: 50%;
+        border-left: 2px solid #64748b;
+      }
+
+      .icon-phone {
+        width: 16px;
+        height: 24px;
+        border: 2px solid #64748b;
+        border-radius: 4px;
+        position: relative;
+      }
+      .icon-phone::after {
+        content: '';
+        position: absolute;
+        bottom: 2px; left: 50%;
+        transform: translateX(-50%);
+        width: 6px;
+        height: 2px;
+        background: #64748b;
+      }
+
+      .icon-pin {
+        width: 16px;
+        height: 16px;
+        border: 2px solid #64748b;
+        border-radius: 50% 50% 50% 0;
+        transform: rotate(-45deg);
+        position: relative;
+      }
+      .icon-pin::after {
+        content: '';
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        width: 6px; height: 6px;
+        border-radius: 50%;
+        background: #64748b;
+      }
+
     </style>
   </head>
   <body>
     <div class="overlay"></div>
+    <div class="glow-orb"></div>
 
-    <div class="container">
-      <!-- Python will inject the AI text right here! -->
+    <div class="main-content">
+      <!-- AI inserts the generated hook here -->
       <div class="hook-text">{{ hook_text }}</div>
     </div>
 
-    <div class="brand-footer">
-      <div class="logo-placeholder"></div>
-      <div class="brand-name">HadesReality</div>
+    <div class="footer-section">
+      <div class="cta-button">
+        <div class="btn-pill">VISIT US</div>
+        <div class="btn-dot"></div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="contact-icon"><div class="icon-globe"></div></div>
+          <span>https://hadesreality.com/</span>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><div class="icon-phone"></div></div>
+          <span>+94 (77) 189-7187</span>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><div class="icon-pin"></div></div>
+          <span>No.185, 2nd Floor, St. Anthony's Building, Negombo Road, Wattala</span>
+        </div>
+      </div>
     </div>
   </body>
 </html>
