@@ -25,21 +25,8 @@ services:
     restart: unless-stopped
     ports:
       - "5678:5678"
-    environment:
-      - DB_TYPE=postgresdb
-      - DB_POSTGRESDB_HOST=postgres
-      - DB_POSTGRESDB_PORT=5432
-      - DB_POSTGRESDB_DATABASE=hadesreality_db
-      - DB_POSTGRESDB_USER=hadesuser
-      - DB_POSTGRESDB_PASSWORD=hadespassword
-      - N8N_BASIC_AUTH_ACTIVE=true
-      - N8N_BASIC_AUTH_USER=admin
-      - N8N_BASIC_AUTH_PASSWORD=admin
     volumes:
       - n8n_data:/home/node/.n8n
-    depends_on:
-      postgres:
-        condition: service_healthy
 
 volumes:
   postgres_data:
